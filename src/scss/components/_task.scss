@@ -1,0 +1,7 @@
+@use '../abstracts/variables' as *;
+
+.task__item {
+    padding: 20px;
+    border: 1px solid $purple;
+    margin: 10px;   
+}

@@ -108,3 +108,23 @@ body {
   background-color: #6a0dad;
   color: #ffffff;
 }
+
+.task__item {
+  padding: 20px;
+  border: 1px solid #6a0dad;
+  margin: 10px;
+}
+
+.project__item.active {
+  background: #000000;
+  color: #ffffff;
+}
+
+.project__add {
+  background-color: #4b57db;
+  color: #ffffff;
+}
+
+.project__btn-wrap {
+  margin-top: 20px;
+}

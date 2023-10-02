@@ -1,0 +1,17 @@
+@use '../abstracts/variables' as *;
+
+.project__item {
+    &.active {
+        background: $black;
+        color: $white;
+    }
+}
+
+.project__add {
+    background-color: $blue;
+    color: $white;
+}
+
+.project__btn-wrap {
+    margin-top: 20px;
+}
