@@ -24,11 +24,6 @@ class Projects {
             eventName: 'click',
             eventCallback: Project.removeProject
         })
-        const tasksTitle = domCreator.createElement({
-            tagName: 'h2',
-            clsName: 'projects-title',
-            content: 'Tasks'
-        })
         let projectsTitle = domCreator.createElement({
             tagName: 'h2',
             clsName: 'projects-title',
@@ -50,7 +45,7 @@ class Projects {
         let taskListContainer = domCreator.createElement({
             tagName: 'section',
             clsName: 'js-todos',
-            child: [tasksTitle, taskListInnerContainer]
+            child:  taskListInnerContainer
         })
         this.main.appendChild(projectsTitle);
         this.main.appendChild(projectNav);
