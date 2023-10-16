@@ -1,17 +1,94 @@
 @use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.projects {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
 
 .project__item {
-    &.active {
-        background: $black;
+    display: flex;
+    border-left: 1px solid $white;
+    border-right: 1px solid $white;
+    padding: 10px 15px;
+    color: $pale-blue;
+    background: $pale-light-blue;
+    
+    font-weight: 500;
+    transition: $quick-transition background-color;
+    &.active,
+    &:hover {
+        background: $medium-blue;
         color: $white;
     }
 }
 
-.project__add {
-    background-color: $blue;
+.project__add, .project__remove {
+    @include flex-center;
+    height: 45px;
+    width: 40px;
+    font-size: 20px;
+    border-radius: 5px;
+    background: $pale-blue;
     color: $white;
+    margin-left: 1px;
+    transition: $quick-transition opacity;
+    &:hover {
+        opacity: 0.8;
+    }
 }
 
-.project__btn-wrap {
+.project__body {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    @include flex-center;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.project__modal {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 25px;
+    background: $white;
+    color: $pale-blue;
+    font-weight: 500;
+}
+
+.project__add-input {
+    margin-bottom: 10px;
+}
+
+.project__label {
+    margin-top: 10px;
+}
+
+.project__val-msg {
+    color: $red;
+}
+
+.project__btn {
+    background: $pale-blue;
+    color: $white;
     margin-top: 20px;
+}
+
+.upper-main {
+    position: relative;
+    @include tablet-up {
+        display: flex;
+        margin-bottom: 18px;
+    }
+}
+
+.projects-title {
+    @include tablet-up {
+        margin-bottom: 15px;
+        color: $pale-blue;
+        font-size: 32px;
+    }
 }

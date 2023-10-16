@@ -1,4 +1,4 @@
-@use './breakpoints';
+@use './breakpoints' as *;
 
 @mixin mobile-up {
     @media only screen and (min-width: $phone) {
@@ -39,5 +39,10 @@
 @mixin flex-center {
     display: flex;
     justify-content: center;
+    align-items: center;
+}
+
+@mixin flex-vertical-center {
+    display: flex;
     align-items: center;
 }

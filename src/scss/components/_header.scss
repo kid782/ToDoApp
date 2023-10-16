@@ -3,7 +3,36 @@
 
 .header {
     @include flex-center;
-    min-height: 100px;
-    background-color: $purple;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    background-color: $pale-blue;
     color: $white;
+}
+
+.header__title {
+    font-family: 'Lobster';
+    font-size: 32px;
+    @include tablet-up {
+        font-size: 42px;
+    }
+}
+
+.header__text {
+    display: none;
+    @include tablet-up {
+        display: block;
+        font-family: 'Lobster';
+        font-size: 24px;
+        font-size: 28px;
+    }
+}
+
+.header__holder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include tablet-up {
+        justify-content: space-between;
+        width: 100%;
+    }
 }

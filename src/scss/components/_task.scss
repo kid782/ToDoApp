@@ -1,7 +1,130 @@
 @use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
 
 .task__item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     padding: 20px;
-    border: 1px solid $purple;
-    margin: 10px;   
+    background-color: $pale-blue;
+    color: $white;
+    border-radius: 8px;
+    @include tablet-up {
+        max-width: 400px;
+    }
+}
+
+.task__add-btn {
+    @include flex-center;
+    width: 100%;
+    border-radius: 8px;
+    min-height: 100px;
+    color: $pale-blue;  
+    background: rgba(35, 45, 63, 0.23);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(35, 45, 63, 0.68);
+    font-size: 90px;
+    transition: 0.4s 0.4s ease background-color, 0.4s 0.4s ease color;
+    @include tablet-up {
+        position: relative;
+        min-height: 200px;
+        overflow: hidden;
+        &:hover {
+            background: $pale-blue;
+            color: $white;
+            .task__move {
+                transform: rotate(-58deg) translate(-365px);
+            }
+            i {
+                opacity: 0;
+            }
+            .task__text-move {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        i {
+            transition: 0.4s 0.4s ease opacity;
+        }
+    }
+}
+
+.task__add-btn::before {
+    
+}
+
+.task__move {
+    @include tablet-up {
+        width: 90%;
+        height: 300%;
+        background: $pale-blue;
+        position: absolute;
+        transform: rotate(-58deg) translate(365px);
+        transition: 0.4s ease transform;
+        opacity: 0.4;
+        z-index: 10;
+    }
+}
+
+.task__text-move {
+    position: absolute;
+    transform: translateY(20px);
+    opacity: 0;
+    font-size: 20px;
+    font-weight: 600;
+    transition: 0.4s 0.6s ease opacity, 0.4s 0.6s ease transform;
+}
+
+.task__container {
+    margin-bottom: 20px;
+}
+
+.task__items {
+    margin-bottom: 40px;
+    @include tablet-up {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }
+}
+
+.task__delete,
+.task__edit {
+    color: $white;
+    font-weight: 500;
+    &:hover {
+        opacity: 0.8;
+    }
+}
+
+.task__delete {
+    margin-left: 10px;
+}
+
+.task__controls {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.task__priority {
+    display: inline-block;
+    margin-top: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    color: $white;
+}
+
+.task__priority--low {
+    background-color: $gray;
+}
+
+.task__priority--medium {
+    background-color: $blue;
+}
+
+.task__priority--high {
+    background-color: $red;
 }

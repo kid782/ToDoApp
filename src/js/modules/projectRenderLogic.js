@@ -1,13 +1,20 @@
 import Project from "./project";
+import addNewProject from "./addNewProject";
+import AddNewTask from "./addNewTask";
 
-export default function handleProjectBtnClick() {
+export function handleProjectBtnClick(e) {
     const projectsContainer = document.querySelector('.js-projects');
-    projectsContainer.addEventListener('click', (e) => {
-        if(e.target.classList.contains('project__item')) {
-            handleActiveProj(e.target);
-        }
-    })
+        handleActiveProj(e.target);
 }   
+export function handleAddProjectClick() {
+    new addNewProject();
+}
+
+export function handleAddTaskClick() {
+    new AddNewTask();
+}
+
+
 const handleActiveProj = (current) => {
     manageActiveButtonStyle(current);
     Project.reRenderTasks(current.dataset.project);

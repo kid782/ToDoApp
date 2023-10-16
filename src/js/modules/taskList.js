@@ -1,9 +1,10 @@
-import domCreator from './createDomEl';
+import domCreator from '../createDomEl';
 import Task from './task';  
+import AddNewTask from './addNewTask';
 
 class TaskList {
     constructor(tasks) {
-        this.parent = document.querySelector('.js-todos');
+        this.parent = document.querySelector('.tasks');
         this.tasks = tasks;
         this.createTaskList();
     }
@@ -14,6 +15,7 @@ class TaskList {
            const item = new Task(taskItem);
            return item.createTask();
         })
+        taskItems.push(AddNewTask.createNewTaskButton());
         const containerProps = {
             tagName: 'div',
             clsName: 'task__items',

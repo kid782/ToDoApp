@@ -115,6 +115,10 @@ body {
   margin: 10px;
 }
 
+.task__add-btn {
+  margin-top: 15px;
+}
+
 .project__item.active {
   background: #000000;
   color: #ffffff;
@@ -127,4 +131,38 @@ body {
 
 .project__btn-wrap {
   margin-top: 20px;
+}
+
+.project__body {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.project__modal {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border: 1px solid #000000;
+  border-radius: 25px;
+  background: #6a0dad;
+  color: #ffffff;
+}
+
+.project__add-input {
+  margin-bottom: 10px;
+}
+
+.project__label {
+  margin-top: 10px;
+}
+
+.project__val-msg {
+  color: #ff0000;
 }

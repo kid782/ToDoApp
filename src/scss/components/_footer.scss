@@ -2,8 +2,32 @@
 @use '../abstracts/mixins' as *;
 
 .footer {
-    @include flex-center;
-    min-height: 100px;
-    background-color: $purple;
+    background-color: $black;
+    padding: 20px 0;
     color: $white;
+}
+
+.footer__holder {
+    @include tablet-up{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+.footer__github {
+    @include flex-vertical-center;
+    color: $white;
+    i {
+        display: inline-block;
+        margin-left: 8px;
+    }
+}
+
+.footer__copyright,
+.footer__github {
+    font-size: 14px;
+    @include tablet-up {
+        font-size: 16px;
+    }
 }

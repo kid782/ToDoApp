@@ -2,12 +2,14 @@ class domCreator {
     static createElement({tagName, clsName, content, child, eventName, 
         eventCallback, attribute,attributeVal}) {
         const element = document.createElement(tagName);
-        if (Array.isArray(clsName)) {
-            clsName.forEach(cls => {
-                element.classList.add(cls);
-            })
-        } else {
-            element.classList.add(clsName);
+        if(clsName) {
+            if (Array.isArray(clsName)) {
+                clsName.forEach(cls => {
+                    element.classList.add(cls);
+                })
+            } else {
+                element.classList.add(clsName);
+            }
         }
         if (content) {
             element.textContent = content;
