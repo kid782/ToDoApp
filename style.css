@@ -357,10 +357,12 @@ button {
   background-color: #232d3f;
   color: #ffffff;
   border-radius: 8px;
+  margin-top: 20px;
 }
 @media only screen and (min-width: 768px) {
   .task__item {
     max-width: 400px;
+    margin-top: 0;
   }
 }
 
@@ -370,7 +372,7 @@ button {
   align-items: center;
   width: 100%;
   border-radius: 8px;
-  min-height: 100px;
+  min-height: 50px;
   color: #232d3f;
   background: rgba(35, 45, 63, 0.23);
   border-radius: 16px;
@@ -378,12 +380,15 @@ button {
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
   border: 1px solid rgba(35, 45, 63, 0.68);
-  font-size: 90px;
+  font-size: 40px;
   transition: 0.4s 0.4s ease background-color, 0.4s 0.4s ease color;
+  margin-top: 20px;
 }
 @media only screen and (min-width: 768px) {
   .task__add-btn {
     position: relative;
+    min-height: 100px;
+    font-size: 90px;
     min-height: 200px;
     overflow: hidden;
   }
@@ -403,6 +408,15 @@ button {
   }
   .task__add-btn i {
     transition: 0.4s 0.4s ease opacity;
+  }
+}
+
+.tasks {
+  max-width: 400px;
+}
+@media only screen and (min-width: 768px) {
+  .tasks {
+    max-width: 100%;
   }
 }
 
@@ -464,7 +478,7 @@ button {
 
 .task__priority {
   display: inline-block;
-  margin-top: 5px;
+  margin: 5px 0 10px 0;
   padding: 5px;
   border-radius: 5px;
   color: #ffffff;
@@ -486,6 +500,7 @@ button {
   display: flex;
   align-items: flex-start;
   flex-wrap: wrap;
+  margin-bottom: 5px;
 }
 
 .project__item {
@@ -560,6 +575,17 @@ button {
   margin-top: 20px;
 }
 
+.project__btn-wrap,
+.project__remove {
+  display: inline-block;
+}
+@media only screen and (min-width: 768px) {
+  .project__btn-wrap,
+  .project__remove {
+    display: block;
+  }
+}
+
 .upper-main {
   position: relative;
 }
@@ -576,4 +602,8 @@ button {
     color: #232d3f;
     font-size: 32px;
   }
+}
+
+.js-todos {
+  margin-top: 20px;
 }
