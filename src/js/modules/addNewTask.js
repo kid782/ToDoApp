@@ -1,7 +1,7 @@
 import domCreator from "../createDomEl";
 import { projects } from "..";
 import Project from "./project";
-import { handleAddTaskClick } from "./projectRenderLogic";
+import { handleAddTaskClick, handlePopUpClose } from "./projectRenderLogic";
 import { updateStorage } from "..";
 import { faIcon } from "../reusableNodes";
 
@@ -40,6 +40,8 @@ class AddNewTask {
             const taskDescInput = domCreator.createElement({tagName:'textarea',clsName:['project__add-input', 'task__desc']});
             const prioLabel = domCreator.createElement({tagName:'label', content:'Enter the task priority', clsName:'project__label'});
             const taskPrioInput = domCreator.createElement({tagName:'select', attribute:'type', attributeVal:'text', clsName:['project__add-input', 'task__prio']});
+            const dateLabel = domCreator.createElement({tagName:'label', content:'Enter the task due date', clsName:'project__label'});
+            const dateInput = domCreator.createElement({tagName:'input', attribute:'type', attributeVal:'date', clsName:['project__add-input', 'task__date-input']});
             taskPrioInput.options.add(new Option('Low', 'Low'));
             taskPrioInput.options.add(new Option('Medium', 'Medium'));
             taskPrioInput.options.add(new Option('High', 'High'));
@@ -51,8 +53,14 @@ class AddNewTask {
                 content:'Confirm', 
                 event:'click',eventCallback:this.handleModalConfirmButton
             });
-            const popUpContainer = domCreator.createElement({tagName:'div', clsName:'project__modal',child:[modalTitle, taskNameInput,descLabel, taskDescInput, prioLabel, taskPrioInput, taskConfirmationButton]});
-            const popUpBody = domCreator.createElement({tagName:'div', clsName:'project__body', child:popUpContainer});
+            const popUpContainer = domCreator.createElement({tagName:'div', clsName:'project__modal',child:[modalTitle, taskNameInput,descLabel, taskDescInput, prioLabel, taskPrioInput, dateLabel, dateInput, taskConfirmationButton]});
+            const popUpBody = domCreator.createElement({
+                tagName:'div', 
+                clsName:'project__body', 
+                child:popUpContainer,
+                eventName: 'click',
+                eventCallback: handlePopUpClose
+            });
             this.main.appendChild(popUpBody);
             taskConfirmationButton.onclick = this.handleModalConfirmButton;
     }
@@ -61,6 +69,7 @@ class AddNewTask {
         const inputTitle = document.querySelector('.task__title-input');
         const inputDesc = document.querySelector('.task__desc');
         const inputPrio = document.querySelector('.task__prio');
+        const inputDate = document.querySelector('.task__date-input')
         const validateTaskInput = (element) => {
             if(element.value) {
                 return true;
@@ -83,8 +92,10 @@ class AddNewTask {
             const newTask = {
                 title : inputTitle.value,
                 description : inputDesc.value,
-                priority: inputPrio.value
+                priority: inputPrio.value,
+                dueDate: inputDate.value
             }
+            console.log(projects);
             if(projects[activeProjIndex].tasks) {
                 projects[activeProjIndex].tasks.push(newTask);
                 updateStorage();

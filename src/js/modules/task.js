@@ -2,13 +2,15 @@ import domCreator from '../createDomEl';
 import Project from './project';
 import { projects, getProjects } from '..';
 import { updateStorage } from '..';
+import { formatDate } from '../helpers';
+import { handlePopUpClose } from './projectRenderLogic';
 
 class Task {
     constructor({title, description, dueDate, priority, notes}) {
         this.main = document.querySelector('.main');
         this.title = title;
         this.description = description;
-        this.dueDate = dueDate;
+        this.dueDate = new Date(dueDate).toLocaleString('en-us',{month: 'short', day: 'numeric', year: 'numeric'});
         this.priority = priority;
         this.notes = notes;
         this.checked = false;
@@ -24,6 +26,7 @@ class Task {
         const titleEl = domCreator.createElement({tagName: 'h2', clsName:'task__title', content: this.title});
         const descEl = domCreator.createElement({tagName: 'p', clsName:'task__description', content: this.description});
         const priorityEl = domCreator.createElement({tagName: 'span', clsName:['task__priority', this.getPriorityClass()], content: this.priority});
+        const dueDateEl = domCreator.createElement({tagName:'div', clsName:'task__date', content: this.dueDate});
         const editTaskBtn = domCreator.createElement({
             tagName: 'button', 
             attribute:'type',
@@ -39,7 +42,8 @@ class Task {
         const taskContentWrapper = domCreator.createElement({tagName: 'div', clsName: 'task__container', child: [
             titleEl,
             descEl,
-            priorityEl
+            priorityEl,
+            dueDateEl
         ]})
         const nodeItem = domCreator.createElement(
             {
@@ -78,11 +82,12 @@ class Task {
         const currenItemText = currentItem.querySelector('.task__title').textContent;
         const currentItemDesc = currentItem.querySelector('.task__description').textContent;
         const currentItemPrio = currentItem.querySelector('.task__priority').textContent;
-        const task = {text: currenItemText, desc: currentItemDesc, prio: currentItemPrio};
+        const currentItemDate = currentItem.querySelector('.task__date').textContent;
+        const task = {text: currenItemText, desc: currentItemDesc, prio: currentItemPrio, dueDate: currentItemDate};
         Task.currenItemText = task;
-        Task.createEditTaskPopUp(currenItemText, currentItemDesc, currentItemPrio);
+        Task.createEditTaskPopUp(currenItemText, currentItemDesc, currentItemPrio, currentItemDate);
     }
-    static createEditTaskPopUp(text, desc, prio) {
+    static createEditTaskPopUp(text, desc, prio, date) {
         const modalTitle = domCreator.createElement({tagName:'label', content:'Task name', clsName:'project__label'
     });
         const taskNameInput = domCreator.createElement({tagName:'input', attribute:'type', attributeVal:'text', clsName:['project__add-input', 'task__title-input']});
@@ -92,6 +97,9 @@ class Task {
         taskDescInput.value = desc;
         const prioLabel = domCreator.createElement({tagName:'label', content:'Task priority', clsName:'project__label'});
         const taskPrioInput = domCreator.createElement({tagName:'select', attribute:'type', attributeVal:'text', clsName:['project__add-input', 'task__prio']});
+        const dateLabel = domCreator.createElement({tagName:'label', content:'Task due date', clsName:'project__label'});
+        const dateInput = domCreator.createElement({tagName:'input', attribute:'type', attributeVal:'date', clsName:['project__add-input', 'task__date-input']});
+        dateInput.value = formatDate(new Date(date));
         taskPrioInput.options.add(new Option('Low', 'Low'));
         taskPrioInput.options.add(new Option('Medium', 'Medium'));
         taskPrioInput.options.add(new Option('High', 'High'));
@@ -105,8 +113,8 @@ class Task {
             eventName:'click',
             eventCallback: Task.handleEditConfirm
         });
-        const popUpContainer = domCreator.createElement({tagName:'div', clsName:'project__modal',child:[modalTitle, taskNameInput,descLabel, taskDescInput, prioLabel, taskPrioInput, taskConfirmationButton]});
-        const popUpBody = domCreator.createElement({tagName:'div', clsName:'project__body', child:popUpContainer});
+        const popUpContainer = domCreator.createElement({tagName:'div', clsName:'project__modal',child:[modalTitle, taskNameInput,descLabel, taskDescInput, prioLabel, taskPrioInput, dateLabel, dateInput, taskConfirmationButton]});
+        const popUpBody = domCreator.createElement({tagName:'div', clsName:'project__body', child:popUpContainer, eventName:'click', eventCallback: handlePopUpClose});
         document.querySelector('.main').appendChild(popUpBody);
     }
     static handleEditConfirm(e) {
@@ -114,6 +122,7 @@ class Task {
         const newTitle = document.querySelector('.task__title-input').value;
         const newDesc = document.querySelector('.task__desc').value;
         const newPrio = document.querySelector('.task__prio').value;
+        const newDate = document.querySelector('.task__date-input').value;
         const currentProjectIndex = Project.getActiveProjectIndex();
         const currentProjectTasks = getProjects()[currentProjectIndex].tasks
         const popUpBody = document.querySelector('.project__body');
@@ -123,7 +132,8 @@ class Task {
         const editedTask = {
             title: newTitle,
             description : newDesc,
-            priority: newPrio
+            priority: newPrio,
+            dueDate: newDate
         }
         projects[currentProjectIndex].tasks.splice([indexOfTaskToEdit],1,editedTask);
         popUpBody.remove();

@@ -5,6 +5,7 @@
     display: flex;
     align-items: flex-start;
     flex-wrap: wrap;
+    margin-bottom:5px;
 }
 
 .project__item {
@@ -77,6 +78,14 @@
     margin-top: 20px;
 }
 
+.project__btn-wrap,
+.project__remove {
+    display: inline-block;
+    @include tablet-up {    
+        display: block;
+    }
+}
+
 .upper-main {
     position: relative;
     @include tablet-up {
@@ -91,4 +100,8 @@
         color: $pale-blue;
         font-size: 32px;
     }
+}
+
+.js-todos {
+    margin-top: 20px;
 }

@@ -1,8 +1,7 @@
 import domCreator from '../createDomEl';
 import TaskList from './taskList';
 import { handleProjectBtnClick } from './projectRenderLogic';
-import { projects, getProjects } from '../index';
-import { updateStorage } from '../index';
+import { projects, getProjects, updateStorage } from '../index';
 import Projects from './projects';
 
 class Project {

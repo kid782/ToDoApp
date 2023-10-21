@@ -14,6 +14,13 @@ export function handleAddTaskClick() {
     new AddNewTask();
 }
 
+export function handlePopUpClose(e) {
+    console.log(e.target.closest('.project__modal'));
+    const popupContainer = document.querySelector('.project__body');
+    if(e.target.classList.contains('project__modal') || e.target.closest('.project__modal')) return;
+    popupContainer.remove();    
+}
+
 
 const handleActiveProj = (current) => {
     manageActiveButtonStyle(current);

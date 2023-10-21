@@ -1,6 +1,7 @@
 import domCreator from "../createDomEl";
 import { projects } from "..";
 import { updateStorage } from "..";
+import { handlePopUpClose } from "./projectRenderLogic";
 import Projects from "./projects";
 
 class addNewProject {
@@ -20,7 +21,7 @@ class addNewProject {
             content:'Confirm'
         });
         const popUpContainer = domCreator.createElement({tagName:'div', clsName:'project__modal',child:[projNameInput,projectConfirmInput, modalTitle]});
-        const popUpBody = domCreator.createElement({tagName:'div', clsName:'project__body', child:popUpContainer});
+        const popUpBody = domCreator.createElement({tagName:'div', clsName:'project__body', child:popUpContainer, eventName:'click', eventCallback:handlePopUpClose});
         this.main.appendChild(popUpBody);
         projectConfirmInput.onclick = this.handleModalConfirmButton;
     }

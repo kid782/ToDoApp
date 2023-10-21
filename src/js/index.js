@@ -11,7 +11,7 @@ export let projectsInit = [
         {   
             title: 'Example task',
             description: 'Task description',
-            dueDate: new Date(),
+            dueDate: new Date().toLocaleDateString('en-us', {day:'numeric', month:'short', year:'numeric'}),
             priority: 'Medium',
             notes: [
                 {
